@@ -104,14 +104,14 @@ td{
     font-size: 14px;
     height: 35px;
 }
-.modify,
+.edit,
 .see,
 .delete,
 .comment{
     margin: 0px 5px;
     font-size: 15px;
 }
-.modify:hover,
+.edit:hover,
 .see:hover,
 .delete:hover{
     cursor: pointer;

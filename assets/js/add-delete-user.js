@@ -48,8 +48,6 @@ modal.addEventListener('submit', (e) => {
                 uncheckedUser.push(e.target);
             }
     }
-    console.log(deleleList);
-    console.log(uncheckedUser);
     //Si l'on clique sur l'icône de suppression
     if(e.target.classList.contains('delete')){
         if(confirm('Êtes-vous sûre de vouloir supprimer cet utilisateur?')){

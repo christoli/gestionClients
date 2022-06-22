@@ -3,12 +3,12 @@
 //Récupération des éléments
 let addBtn = document.querySelector('#addBtn');
 let modal = document.querySelector('#formModal');
-let close = document.querySelector('#closeBtn');
+let closeBtn = document.querySelector('#closeBtn');
 let cancel = document.querySelector('#cancelBtn');
 
 //Evénements
 addBtn.addEventListener('click', openModal);
-close.addEventListener('click', closeModal);
+closeBtn.addEventListener('click', closeModal);
 cancelBtn.addEventListener('click', closeModal);
 window.addEventListener('click', outsideClick);
 
@@ -31,10 +31,17 @@ function openModal(){
 //Fermeture du modal
 function closeModal(){
     modal.style.display = 'none';
-    clearField();   
+    clearField(); 
+    modal.id='formModal';
+    document.getElementById('submitBtn').textContent = 'Sauvegarder';
+    document.querySelector('#formTitle').textContent = 'Enrégistrement';  
 }
 function outsideClick(e){
     if(e.target.classList.contains === 'modal'){
         modal.display.style = 'none';
+        clearField();
+        modal.id='formModal';
+        document.getElementById('submitBtn').textContent = 'Sauvegarder';
+        document.querySelector('#formTitle').textContent = 'Enrégistrement';
     }
 }

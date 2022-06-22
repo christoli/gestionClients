@@ -30,6 +30,23 @@ static getUsers(){
         users.push(user);
         localStorage.setItem('users',JSON.stringify(users));
     }
+    //Mise à jour d'un utilisateur dans le localStorage
+    static updateUsers(user){
+        let users = Sauvegarde.getUsers();
+        users.forEach(info =>{
+            if(user.id === info.id){
+                info.id = user.id;
+                info.nom = user.nom;
+                info.prenom = user.prenom;
+                info.naissance = user.naissance;
+                info.email = user.email;
+                info.phone = user.phone;
+                info.sexe = user.sexe;
+                info.comment = user.comment;
+            }
+        });
+        localStorage.setItem('users',JSON.stringify(users));
+    }
     //Suppression des utilisateurs dans le localStorage
     static removeUsers(id){
         let users = Sauvegarde.getUsers();
@@ -63,7 +80,7 @@ class UI{
         <td>${user.phone}</td>
         <td>${user.sexe}</td>
         <td>
-            <i class="fa-solid fa-pen edit modify"></i>
+            <i class="fa-solid fa-pen edit"></i>
             <i class="fa-solid fa-eye see"></i>
             <i class="fa-solid fa-xmark delete"></i>
             <i class="fa-solid fa-comment comment"></i>
@@ -75,6 +92,30 @@ class UI{
         } else{
                 usersList.insertBefore(row, null);
             }
+    }
+    //Modification et mise à jour d'un utilisateur dans le tableau
+    static updateUserList(user,line){
+        let usersList = document.getElementById('usersList');
+        let row = document.createElement('tr');
+
+        row.innerHTML = `
+        <td><input type="checkbox" class="selectUser" id="checkbox"></td>
+        <td>${user.id}</td>
+        <td>${user.nom}</td>
+        <td>${user.prenom}</td>
+        <td>${user.naissance}</td>
+        <td>${user.email}</td>
+        <td>${user.phone}</td>
+        <td>${user.sexe}</td>
+        <td>
+            <i class="fa-solid fa-pen edit"></i>
+            <i class="fa-solid fa-eye see"></i>
+            <i class="fa-solid fa-xmark delete"></i>
+            <i class="fa-solid fa-comment comment"></i>
+        </td>
+        `;
+        //Remplacement de la ligne sélectionnée par la ligne avec les infos mises à jour
+        line.replaceWith(row);
     }
     //Suppression des utilisateurs dans le tableau d'affichage
     static deleteUser(element) {
