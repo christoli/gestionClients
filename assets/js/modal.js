@@ -1,20 +1,23 @@
-// Contrôle du modal d'enrégistrement
+// Contrôle du modal d'enrégistrement et d'affichage utilisateur
 
 //Récupération des éléments
 let addBtn = document.querySelector('#addBtn');
 let modal = document.querySelector('#formModal');
 let closeBtn = document.querySelector('#closeBtn');
 let cancel = document.querySelector('#cancelBtn');
+let userCloseBtn = document.getElementById('userCloseBtn');
+let userModal = document.getElementById('userProfil');
 
 //Evénements
 addBtn.addEventListener('click', openModal);
 closeBtn.addEventListener('click', closeModal);
+userCloseBtn.addEventListener('click', closeModal);
 cancelBtn.addEventListener('click', closeModal);
 window.addEventListener('click', outsideClick);
 
 //Ouverture du modal
 function openModal(){
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
 }
 
  //Vider les champs du formulaire
@@ -31,6 +34,7 @@ function openModal(){
 //Fermeture du modal
 function closeModal(){
     modal.style.display = 'none';
+    userModal.style.display = 'none';
     clearField(); 
     modal.id='formModal';
     document.getElementById('submitBtn').textContent = 'Sauvegarder';

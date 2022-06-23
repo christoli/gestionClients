@@ -6,11 +6,10 @@ let line;
 let users = Sauvegarde.getUsers();
 //Evènement de clic sur la liste d'utilisateurs
 document.querySelector('#usersList').addEventListener('click', (e)=>{
-    //Récupération de la ligne sélectionnée pour modification
+    //Récupération de la ligne
+    line = e.target;
+    let userId = parseInt(line.parentElement.parentElement.childNodes[3].textContent);
     if(e.target.classList.contains('edit')){
-        //Récupération de la ligne
-        line = e.target;
-        let userId = parseInt(line.parentElement.parentElement.childNodes[3].textContent);
         //Passage des informations dans les champs du formulaire
         users.forEach(user => {
             if(user.id === userId){
@@ -30,9 +29,15 @@ document.querySelector('#usersList').addEventListener('click', (e)=>{
         document.querySelector('#formTitle').textContent = 'Modification';
         document.getElementById('submitBtn').textContent = 'Modifier';
         //Appel du formulaire(modal) pour modification
-        modal.style.display='block';     
+        modal.style.display='flex';     
+    }
+
+    //Ligne sélectionnée au clic sur l'icône d'affichage
+    if(e.target.classList.contains('see')){
+        userModal.style.display='flex';
     }
 });
+
 //Evènement click du bouton "Modifier" du formulaire
 document.getElementById('submitBtn').addEventListener('click', (e)=>{
     e.preventDefault();
@@ -59,3 +64,5 @@ document.getElementById('submitBtn').addEventListener('click', (e)=>{
 
     alert('Modification effectuée !');
 });
+
+//
