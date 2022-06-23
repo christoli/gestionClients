@@ -33,8 +33,8 @@ document.querySelector('#usersList').addEventListener('click', (e)=>{
         modal.style.display='block';     
     }
 });
-//Evènement submit du formulaire
-modal.addEventListener('submit', (e)=>{
+//Evènement click du bouton "Modifier" du formulaire
+document.getElementById('submitBtn').addEventListener('click', (e)=>{
     e.preventDefault();
     let nom = document.querySelector('#nom').value;
     let prenom = document.querySelector('#prenom').value;
