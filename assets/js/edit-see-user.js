@@ -24,7 +24,7 @@ document.querySelector('#usersList').addEventListener('click', (e)=>{
                 document.getElementById('commentId').value = user.comment;
             }
         });
-        console.log(e.target);
+       
         //Modification de l'id, le titre et le bouton "Sauvegarder" du formulaire
         modal.id ='formModalEdit';
         document.querySelector('#formTitle').textContent = 'Modification';
@@ -91,4 +91,15 @@ document.getElementById('submitBtn').addEventListener('click', (e)=>{
             });
             e.target.title = commentTitle.substr(0, 49);
         }
+    });
+
+//Recherche et Filtrage
+let resultList;
+    //Evenement d'entrée dans l'input de recherche
+    document.getElementById('searchField').addEventListener('keyup', (e)=>{
+        //Récupération de la valeur de l'input
+        let text = e.target.value.toLowerCase();
+        //console.log(text);
+        //Passage du texte à la méthode de filtrage et récupération des résultats de recherche
+        resultList = UI.filter(text);
     });

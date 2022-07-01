@@ -123,6 +123,25 @@ class UI{
           element.parentElement.parentElement.remove();
         }
       }
+    static filter(text){
+        let searchResult = [];
+        // Récupération des éléments à filtrer
+        let items = document.getElementsByTagName('td');
+        // Mettre les elements dans un tableau, puis les parcourir
+        Array.from(items).forEach(item =>{
+            let itemName = item.textContent;
+            console.log(itemName)
+            //Comparer chaque élément avec le texte de recherche
+            if(itemName.toLowerCase().indexOf(text) != -1){
+                item.parentElement.style.display = 'table-row';
+                searchResult.push(item.parentElement);
+            }
+                else{
+                    item.parentElement.style.display = 'none';
+                }
+        });
+        return searchResult;
+    }
 }
 
 // Affichage des utilisateurs
