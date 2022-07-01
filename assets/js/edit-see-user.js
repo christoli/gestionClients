@@ -1,7 +1,8 @@
 //Déclaration de la variable de récupération de l'Id de l'utilisateur qui sera modifié
 let userIdEdit = 0;
 //Déclaration de la variable de récupération de la ligne séletionnée
-let line; 
+let line;
+let commentTitle; 
 //Récupération des informations depuis le localStorage
 let users = Sauvegarde.getUsers();
 //Evènement de clic sur la liste d'utilisateurs
@@ -23,7 +24,7 @@ document.querySelector('#usersList').addEventListener('click', (e)=>{
                 document.getElementById('commentId').value = user.comment;
             }
         });
-        console.log(userId);
+        console.log(e.target);
         //Modification de l'id, le titre et le bouton "Sauvegarder" du formulaire
         modal.id ='formModalEdit';
         document.querySelector('#formTitle').textContent = 'Modification';
@@ -34,6 +35,19 @@ document.querySelector('#usersList').addEventListener('click', (e)=>{
 
     //Ligne sélectionnée au clic sur l'icône d'affichage
     if(e.target.classList.contains('see')){
+        //Affichage des informations dans le modal
+        users.forEach(user => {
+            if(user.id === userId){
+                userIdEdit = userId;
+                document.getElementById('infoNom').innerHTML = user.nom;
+                document.getElementById('infoPrenom').innerHTML = user.prenom;
+                document.getElementById('infoNaissance').innerHTML = user.naissance;
+                document.getElementById('infoEmail').innerHTML = user.email;
+                document.getElementById('infoTel').innerHTML = user.phone;
+                document.getElementById('infoSexe').innerHTML = user.sexe;
+                document.getElementById('userComment').innerHTML = user.comment;
+            }
+        });
         userModal.style.display='flex';
     }
 });
@@ -65,4 +79,16 @@ document.getElementById('submitBtn').addEventListener('click', (e)=>{
     alert('Modification effectuée !');
 });
 
-//
+//Affichage du commentaire au survol de l'icône de commentaire
+    //Déclaration de l'événement de survol et récupération de l'élément comment
+    document.querySelector('#usersList').addEventListener('mouseover', (e) =>{
+        if(e.target.classList.contains('comment')){
+            let userId = parseInt(e.target.parentElement.parentElement.childNodes[3].textContent);
+            users.forEach(user =>{
+                if(user.id === userId){
+                    commentTitle = user.comment;
+                }
+            });
+            e.target.title = commentTitle.substr(0, 49);
+        }
+    });
