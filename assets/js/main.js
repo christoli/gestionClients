@@ -69,7 +69,7 @@ class UI{
     static addusersToList(user){
         let usersList = document.getElementById('usersList');
         let row = document.createElement('tr');
-        row.data = 'data-user-row'; 
+        row.className = 'userRow'; 
         row.innerHTML = `
         <td><input type="checkbox" class="selectUser" id="checkbox"></td>
         <td>${user.id}</td>
@@ -127,7 +127,7 @@ class UI{
     static filter(text){
         let searchResult = [];
         // Récupération des éléments à filtrer
-        let items = document.getElementsByTagName('tr');
+        let items = document.getElementsByClassName('userRow');
         // Mettre les elements dans un tableau, puis les parcourir
         Array.from(items).forEach(item =>{
             let itemName = item.textContent;

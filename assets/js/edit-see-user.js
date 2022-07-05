@@ -15,23 +15,17 @@ document.querySelector('#usersList').addEventListener('click', (e)=>{
         users.forEach(user => {
             if(user.id === userId){
                 userIdEdit = userId;
-                document.getElementById('nom').value = user.nom;
-                document.getElementById('prenom').value = user.prenom;
-                document.getElementById('naissance').value = user.naissance;
-                document.getElementById('email').value = user.email;
-                document.getElementById('phone').value = user.phone;
-                document.getElementById('sexe').value = user.sexe;
-                document.getElementById('commentId').value = user.comment;
+                document.getElementById('editNom').value = user.nom;
+                document.getElementById('editPrenom').value = user.prenom;
+                document.getElementById('editBirthday').value = user.naissance;
+                document.getElementById('editEmail').value = user.email;
+                document.getElementById('editPhone').value = user.phone;
+                document.getElementById('editSexe').value = user.sexe;
+                document.getElementById('editCommentId').value = user.comment;
             }
         });
-       
-        //Modification de l'id, le titre et le bouton "Sauvegarder" du formulaire
-        modal.id ='formModalEdit';
-        document.querySelector('#formTitle').textContent = 'Modification';
-        document.getElementById('submitBtn').textContent = 'Modifier';
-        document.getElementById('submitBtn').id = 'editBtn';
-        //Appel du formulaire(modal) pour modification
-        modal.style.display='flex';     
+        //Appel du formulaire de modification
+        editModal.style.display='flex';     
     }
 
     //Ligne sélectionnée au clic sur l'icône d'affichage
@@ -54,29 +48,25 @@ document.querySelector('#usersList').addEventListener('click', (e)=>{
 });
 
 //Evènement click du bouton "Modifier" du formulaire
-document.getElementById('editBtn').addEventListener('click', (e)=>{
+document.getElementById('editForm').addEventListener('submit', (e)=>{
     e.preventDefault();
-    let nom = document.querySelector('#nom').value;
-    let prenom = document.querySelector('#prenom').value;
-    let naissance = document.querySelector('#naissance').value;
-    let sexe = document.querySelector('#sexe').value;
-    let email = document.querySelector('#email').value;
-    let phone = document.querySelector('#phone').value;
-    let comment = document.querySelector('#commentId').value;
+    let nom = document.querySelector('#editNom').value;
+    let prenom = document.querySelector('#editPrenom').value;
+    let naissance = document.querySelector('#editBirthday').value;
+    let sexe = document.querySelector('#editSexe').value;
+    let email = document.querySelector('#editEmail').value;
+    let phone = document.querySelector('#editPhone').value;
+    let comment = document.querySelector('#editCommentId').value;
     //Récupération des infos modifiées
     let userEdited = new Users(userIdEdit,nom,prenom,naissance,email,phone,sexe,comment);
-    //Mise à jour des infos dans le localStorage
-    Sauvegarde.updateUsers(userEdited);
     //Mise à jour des infos dans le tableau
     UI.updateUserList(userEdited,e.target.parentElement.parentElement);
+    //Mise à jour des infos dans le localStorage
+    Sauvegarde.updateUsers(userEdited);
     //Vidage des champs
     clearField();
-    //Fermeture et initialisation des infos du formulaire(modal)
-    modal.style.display='none';
-    modal.id='formModal';
-    document.getElementById('editBtn').textContent = 'Sauvegarder';
-    document.getElementById('editBtn').id = 'submitBtn';
-    document.querySelector('#formTitle').textContent = 'Enrégistrement';
+    //Fermeture du formulaire(modal)
+    editModal.style.display='none';
 
     alert('Modification effectuée !');
 });
