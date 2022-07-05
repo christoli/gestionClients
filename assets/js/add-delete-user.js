@@ -49,7 +49,7 @@ modal.addEventListener('submit', (e) => {
             }
     }
     //Si l'on clique sur l'icône de suppression
-    if(e.target.classList.contains('delete')){
+    if(e.target.classList.contains('delete') && deleleList.lenght <= 0){
         if(confirm('Êtes-vous sûre de vouloir supprimer cet utilisateur?')){
             //Suppression dans le tableau d'affichage
             UI.deleteUser(e.target);

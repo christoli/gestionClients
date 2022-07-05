@@ -29,6 +29,7 @@ document.querySelector('#usersList').addEventListener('click', (e)=>{
         modal.id ='formModalEdit';
         document.querySelector('#formTitle').textContent = 'Modification';
         document.getElementById('submitBtn').textContent = 'Modifier';
+        document.getElementById('submitBtn').id = 'editBtn';
         //Appel du formulaire(modal) pour modification
         modal.style.display='flex';     
     }
@@ -53,7 +54,7 @@ document.querySelector('#usersList').addEventListener('click', (e)=>{
 });
 
 //Evènement click du bouton "Modifier" du formulaire
-document.getElementById('submitBtn').addEventListener('click', (e)=>{
+document.getElementById('editBtn').addEventListener('click', (e)=>{
     e.preventDefault();
     let nom = document.querySelector('#nom').value;
     let prenom = document.querySelector('#prenom').value;
@@ -67,13 +68,14 @@ document.getElementById('submitBtn').addEventListener('click', (e)=>{
     //Mise à jour des infos dans le localStorage
     Sauvegarde.updateUsers(userEdited);
     //Mise à jour des infos dans le tableau
-    UI.updateUserList(userEdited,line.parentElement.parentElement);
+    UI.updateUserList(userEdited,e.target.parentElement.parentElement);
     //Vidage des champs
     clearField();
     //Fermeture et initialisation des infos du formulaire(modal)
     modal.style.display='none';
     modal.id='formModal';
-    document.getElementById('submitBtn').textContent = 'Sauvegarder';
+    document.getElementById('editBtn').textContent = 'Sauvegarder';
+    document.getElementById('editBtn').id = 'submitBtn';
     document.querySelector('#formTitle').textContent = 'Enrégistrement';
 
     alert('Modification effectuée !');

@@ -69,7 +69,7 @@ class UI{
     static addusersToList(user){
         let usersList = document.getElementById('usersList');
         let row = document.createElement('tr');
-
+        row.data = 'data-user-row'; 
         row.innerHTML = `
         <td><input type="checkbox" class="selectUser" id="checkbox"></td>
         <td>${user.id}</td>
@@ -97,7 +97,7 @@ class UI{
     static updateUserList(user,line){
         let usersList = document.getElementById('usersList');
         let row = document.createElement('tr');
-
+        
         row.innerHTML = `
         <td><input type="checkbox" class="selectUser" id="checkbox"></td>
         <td>${user.id}</td>
@@ -123,21 +123,21 @@ class UI{
           element.parentElement.parentElement.remove();
         }
       }
+    //Recherche et Filtrage
     static filter(text){
         let searchResult = [];
         // Récupération des éléments à filtrer
-        let items = document.getElementsByTagName('td');
+        let items = document.getElementsByTagName('tr');
         // Mettre les elements dans un tableau, puis les parcourir
         Array.from(items).forEach(item =>{
             let itemName = item.textContent;
-            console.log(itemName)
             //Comparer chaque élément avec le texte de recherche
             if(itemName.toLowerCase().indexOf(text) != -1){
-                item.parentElement.style.display = 'table-row';
-                searchResult.push(item.parentElement);
+                item.style.display = 'table-row';
+                searchResult.push(item);
             }
                 else{
-                    item.parentElement.style.display = 'none';
+                    item.style.display = 'none';
                 }
         });
         return searchResult;
